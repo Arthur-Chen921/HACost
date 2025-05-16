@@ -50,3 +50,16 @@
     </div>
 </body>
 </html>
+
+<div class="result">
+    <h3>🔮 智能定价建议</h3>
+    <p>决策树预测：$ {{ "%.2f"|format(prediction.tree) }}</p>
+    <p>神经网络预测：$ {{ "%.2f"|format(prediction.nn) }}</p>
+    <p>推荐定价策略：{{ cluster_info }}</p>
+    
+    <div class="model-info">
+        <h4>📊 模型可信度说明</h4>
+        <p>决策树MSE: {{ "%.2f"|format(tree_mse) }}（值越小越好）</p>
+        <p>神经网络Loss: {{ "%.2f"|format(nn_loss) }}</p>
+    </div>
+</div>
