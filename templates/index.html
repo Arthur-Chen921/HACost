@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>医疗服务定价计算器</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 服务定价计算器</h1>
+        
+        <form method="POST">
+            <!-- 服务量输入 -->
+            <div class="input-group">
+                <label>注册护士服务次数：</label>
+                <input type="number" name="nurse_visits" required min="0" value="50">
+            </div>
+            
+            <div class="input-group">
+                <label>物理治疗次数：</label>
+                <input type="number" name="therapy_visits" required min="0" value="30">
+            </div>
+            
+            <div class="input-group">
+                <label>家庭护理次数：</label>
+                <input type="number" name="aide_visits" required min="0" value="20">
+            </div>
+
+            <!-- 运营参数 -->
+            <div class="input-group">
+                <label>目标利润率 (%)：</label>
+                <input type="number" name="profit_margin" step="0.01" required value="0.15" min="0" max="1">
+            </div>
+            
+            <div class="input-group">
+                <label>Medicare比例 (%)：</label>
+                <input type="number" name="medicare_ratio" step="0.1" required value="0.6" min="0" max="1">
+            </div>
+
+            <button type="submit">计算定价</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>💰 定价结果</h2>
+            <p>预测成本：$ {{ "%.2f"|format(result.predicted_cost) }}</p>
+            <p>基准定价：$ {{ "%.2f"|format(result.base_price) }}</p>
+            <p>最终定价：$ {{ "%.2f"|format(result.adjusted_price) }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
